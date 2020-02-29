@@ -1,7 +1,8 @@
 <div class="card-body">
-  <form novalidate>
+  <form novalidate #form="ngForm">
     <fieldset>
       <legend>Product Search Tags</legend>
+      For:{{form.valid}}
 
       <div class="form-group row">
         <label class="col-md-2 col-form-label"
@@ -17,7 +18,7 @@
                  name="category"
                  #categoryVar="ngModel"
                  [ngClass]="{'is-invalid': (categoryVar.touched ||
-                                            categoryVar.dirty || 
+                                            categoryVar.dirty ||
                                             product.id !== 0) &&
                                             !categoryVar.valid }" />
           <span class="invalid-feedback">
