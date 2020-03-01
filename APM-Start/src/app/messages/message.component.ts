@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { MessageService } from './message.service';
+import {MessageService} from './message.service';
 
 @Component({
   templateUrl: './message.component.html',
@@ -15,11 +15,12 @@ export class MessageComponent {
   }
 
   constructor(private messageService: MessageService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   close(): void {
     // Close the popup.
-    this.router.navigate([{ outlets: { popup: null } }]);
+    this.router.navigate([{outlets: {popup: null}}]);
     this.messageService.isDisplayed = false;
   }
 }

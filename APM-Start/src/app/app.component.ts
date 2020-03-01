@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
-import { slideInAnimation } from './app.animation'
-import { MessageService } from './messages/message.service';
+import {Component} from '@angular/core';
+import {Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
+import {slideInAnimation} from './app.animation'
+import {MessageService} from './messages/message.service';
 
-import { AuthService } from './user/auth.service';
+import {AuthService} from './user/auth.service';
 
 @Component({
   selector: 'pm-root',
@@ -33,10 +33,10 @@ export class AppComponent {
   constructor(private authService: AuthService,
               private router: Router,
               public messageService: MessageService) {
-                router.events.subscribe((routerEvent: Event) => {
-                  this.checkRouterEvent(routerEvent);
-                })
-              }
+    router.events.subscribe((routerEvent: Event) => {
+      this.checkRouterEvent(routerEvent);
+    })
+  }
 
   checkRouterEvent(routerEvent: Event): void {
     if (routerEvent instanceof NavigationStart) {
@@ -44,19 +44,19 @@ export class AppComponent {
     }
 
     if (routerEvent instanceof NavigationEnd ||
-        routerEvent instanceof NavigationCancel ||
-        routerEvent instanceof NavigationError) {
-          this.loading = false;
-        }
+      routerEvent instanceof NavigationCancel ||
+      routerEvent instanceof NavigationError) {
+      this.loading = false;
+    }
   }
 
   displayMessages(): void {
-    this.router.navigate([{ outlets: { popup: ['messages'] } }]);
+    this.router.navigate([{outlets: {popup: ['messages']}}]);
     this.messageService.isDisplayed = true;
   }
 
   hideMessages(): void {
-  this.router.navigate([{ outlets: { popup: null } }]);
+    this.router.navigate([{outlets: {popup: null}}]);
     this.messageService.isDisplayed = false;
   }
 

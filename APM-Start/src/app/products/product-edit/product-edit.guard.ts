@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ProductEditComponent } from './product-edit.component';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {Observable} from 'rxjs';
+import {ProductEditComponent} from './product-edit.component';
 
 @Injectable({
   providedIn: 'root'

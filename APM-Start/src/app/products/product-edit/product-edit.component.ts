@@ -1,21 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { MessageService } from '../../messages/message.service';
+import {MessageService} from '../../messages/message.service';
 
-import { Product } from '../product';
-import { ProductService } from '../product.service';
-import { ProductResolved } from '../product';
+import {Product, ProductResolved} from '../product';
+import {ProductService} from '../product.service';
 
 @Component({
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
-export class ProductEditComponent implements OnInit{
+export class ProductEditComponent implements OnInit {
   pageTitle = 'Product Edit';
   errorMessage: string;
 
-  private dataIsValid: { [key:string]: boolean} = {};
+  private dataIsValid: { [key: string]: boolean } = {};
 
   get isDirty(): boolean {
     return JSON.stringify(this.originalProduct) !== JSON.stringify(this.currentProduct);
@@ -31,13 +30,14 @@ export class ProductEditComponent implements OnInit{
   set product(value: Product) {
     this.currentProduct = value;
     // Clone the object to retain a copy
-    this.originalProduct = { ...value };
+    this.originalProduct = {...value};
   }
 
   constructor(private productService: ProductService,
               private messageService: MessageService,
               private route: ActivatedRoute,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -84,11 +84,11 @@ export class ProductEditComponent implements OnInit{
 
   isValid(path?: string): boolean {
     this.validate();
-    if(path) {
+    if (path) {
       return this.dataIsValid[path];
     }
     return (this.dataIsValid &&
-        Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
+      Object.keys(this.dataIsValid).every(d => this.dataIsValid[d] === true));
   }
 
   reset(): void {
@@ -98,7 +98,7 @@ export class ProductEditComponent implements OnInit{
   }
 
   saveProduct(): void {
-    if(this.isValid()) {
+    if (this.isValid()) {
       if (true === true) {
         if (this.product.id === 0) {
           this.productService.createProduct(this.product).subscribe({
@@ -132,20 +132,20 @@ export class ProductEditComponent implements OnInit{
     this.dataIsValid = {};
 
     // 'info' tab
-    if(this.product.productName &&
-        this.product.productName.length >= 3 &&
-        this.product.productCode) {
-          this.dataIsValid['info'] = true;
+    if (this.product.productName &&
+      this.product.productName.length >= 3 &&
+      this.product.productCode) {
+      this.dataIsValid['info'] = true;
     } else {
       this.dataIsValid['info'] = false;
     }
 
     // 'tags' tab
-    if(this.product.category &&
-        this.product.category.length >=3) {
-          this.dataIsValid['tags'] = true;
-        } else {
-          this.dataIsValid['tags'] = false;
-        }
+    if (this.product.category &&
+      this.product.category.length >= 3) {
+      this.dataIsValid['tags'] = true;
+    } else {
+      this.dataIsValid['tags'] = false;
+    }
   }
 }
